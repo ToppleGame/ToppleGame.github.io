@@ -1,8 +1,8 @@
 function ToppleTP() {
-	grid.style.marginTop = '-140px'
-	grid.style.marginLeft = '-675px'
-	nR = 8
-	nC = 21
+	grid.style.marginTop = '-490px'
+	grid.style.marginLeft = '-1675px'
+	nR = 16
+	nC = 41
 	move(nR, nC)
 	ToppleWhere()
 }
@@ -16,7 +16,7 @@ function ToppleNewUser() {
 	.then((userCredential) => {
 		// Signed in
 		var user = userCredential.user;
-		ToppleSaveToDB(user.uid, 325, 210, 1, 1)
+		ToppleSaveToDB(user.uid, 325, 210, 1, 1, username)
 		console.log(user);
 		console.log(userCredential);
 		// ...
@@ -66,18 +66,21 @@ function ToppleWhere() {
 	document.getElementById("coordsxy").innerText = "Coords: " + nC + ", " + nR
 }
 
-function ToppleInitGame() {
-	document.getElementById("Name").innerHTML = "It's-a me, <b>" + pName + "</b>"
-
+function ToppleGrid() {
 	document.getElementsByClassName("vignette")[0].style.pointerEvents = "all"
 
-	login.outerHTML = ""
-	for (let i = 0; i < maxRows; i++) {
-		grid.insertRow()
-		for (let j = 0; j < maxCols*14; j++) {
-			grid.rows[i].insertCell()
+	if (grid.rows.length < maxRows) {
+		for (let i = 0; i < maxRows; i++) {
+			grid.insertRow()
+			if (grid.rows[i].cells.length < maxCols*14) {
+				for (let j = 0; j < maxCols*14; j++) {
+					grid.rows[i].insertCell()
+				}
+			}
 		}
 	}
+}
+function ToppleInitGame() {
 	grid.rows[nR].cells[nC].innerText = "Ello!!!\nTopple"
 	
 	for (let i = 1; i < maxRows; i++) {
@@ -136,7 +139,7 @@ function ToppleInitGame() {
 
 UserId = ""
 
-function ToppleSaveToDB(uid, mLeft, mTop, nR, nC) {
+function ToppleSaveToDB(uid, mLeft, mTop, nR, nC, username) {
 	firebase.database().ref('users/' + uid).set({
 		username: username,
 		position : {
@@ -148,6 +151,7 @@ function ToppleSaveToDB(uid, mLeft, mTop, nR, nC) {
 	});
 }
 function ToppleGetData(uid) {
+	// firebase.database().ref("users/" + "MYU7NAXDfnYhGcXTzmKAYcapmRw1").on("value", (snapshot) => {
 	firebase.database().ref("users/" + uid).on("value", (snapshot) => {
 		mLeft = snapshot.val()["position"]["left"];
 		mTop = snapshot.val()["position"]["top"];
@@ -156,6 +160,7 @@ function ToppleGetData(uid) {
 		grid.style.marginLeft = mLeft + "px";
 		grid.style.marginTop = mTop + "px";
 		pName = snapshot.val()["username"];
+		// UserId = "MYU7NAXDfnYhGcXTzmKAYcapmRw1"
 		UserId = uid;
 		oR = nR
 		oC = nC
@@ -164,7 +169,11 @@ function ToppleGetData(uid) {
 		map = snapshot.val();
 		maxRows = map["rows"];
 		maxCols = map["TilesX"];
+		
+		document.getElementById("Name").innerHTML = "It's-a me, <b>" + pName + "</b>"
 
+		ToppleGrid()
 		ToppleInitGame();
+		console.log(grid.rows.length, grid.rows[1].cells.length);
 	})
 }

@@ -5,15 +5,7 @@ function init() {
 	document.getElementsByClassName("vignette")[0].style.pointerEvents = "none"
 	grid.style.marginTop = '210px'
 	grid.style.marginLeft = '325px'
-	// ToppleWhere()
 }
-
-
-// nR = 1
-// nC = 1
-
-// oR = nR
-// oC = nC
 
 function keyCheck() {
 	ToppleInit()

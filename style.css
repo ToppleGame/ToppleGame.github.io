@@ -1,0 +1,85 @@
+:root {
+	--cellpx: 47px
+}
+
+body {
+	background-color: grey;
+}
+
+table, td {
+	border: 1px solid yellowgreen;
+	border-collapse: collapse;
+	overflow: hidden;
+}
+td {
+	min-width: var(--cellpx);
+	max-width: var(--cellpx);
+	height: var(--cellpx);
+}
+#grid {
+	transform: translate(-75px, -75px)
+}
+
+
+#Wid_1 {
+	background-color: lightgreen;
+}
+#Wid_2 {
+	background-color: lightblue;
+}
+#Wid_3 {
+	background-color: lightgoldenrodyellow;
+}
+#Wid_4 {
+	background-color: lightpink;
+}
+#Wid_5 {
+	background-color: #55e755;
+}
+#Wid_6 {
+	background-color: #75cdeb;
+}
+#Wid_7 {
+	background-color: #f1f197;
+}
+#Wid_8 {
+	background-color: #f19caa;
+}
+#Wid_9 {
+	background-color: black;
+}
+
+
+.data{
+	border: 1px solid black;
+	width: 99.25%;
+	height: 100px;
+	background-color: white;
+}
+
+
+#Game_Screen {
+	background-color: #e4e6a8;
+	position: absolute;
+	border: 2px dashed black;
+	width: 650px;
+	height: 420px;
+	overflow: hidden;
+
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+#Login {
+	margin-top: 100px;
+	margin-left: 100px;
+}
+.vignette {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 650px;
+	height: 420px;
+	box-shadow: 0 0 140px rgba(0, 0, 0, 1) inset;
+	transform: translate(-50%, -50%);
+}

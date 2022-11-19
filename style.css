@@ -50,11 +50,18 @@ td {
 }
 
 
-.data{
+.data {
 	border: 1px solid black;
 	width: 99.25%;
 	height: 100px;
 	background-color: white;
+}
+#playerdata {
+	float: left;
+}
+#buttons {
+	margin-top: 15px;
+	margin-left: 200px;
 }
 
 

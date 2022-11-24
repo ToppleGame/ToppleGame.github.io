@@ -18,13 +18,15 @@
 			<div id="coords">
 				<p id="coordsxy">Coords: </p>
 			</div>
+			<input type="number" id="x"><br>
+			<input type="number" id="y">
 		</div>
 		<div id="buttons">
+			<button onclick="ToppleSwitch()">Change Pad</button><br>
 			<button onclick="ToppleOut()">ToppleOut</button><br>
 			<button onclick="ToppleTP()">ToppleTP</button><br>
 			<button onclick="Save()">ToppleSave</button>
 		</div>
-		<button onclick="ToppleSwitch()">Change Pad</button>
 	</div>
 	<div id="Game_Screen">
 		<!-- <div id="Login">
@@ -38,10 +40,10 @@
 	<div class="vignette"></div>
 	<div class="set wire" id="pad">
 	  <nav class="d-pad" id="wirepad">
-		<a class="up" onclick="document.getElementById('grid').innerText = window.event" href="#"></a>
-		<a class="right" href="#"></a>
-		<a class="down" href="#"></a>
-		<a class="left" href="#"></a>  
+		<a class="up" onclick="ToppleMove(1)" href="#"></a>
+		<a class="right" onclick="ToppleMove(2)" href="#"></a>
+		<a class="down" onclick="ToppleMove(3)" href="#"></a>
+		<a class="left" onclick="ToppleMove(4)" href="#"></a>  
 	  </nav>
 	</div>
 	<script>

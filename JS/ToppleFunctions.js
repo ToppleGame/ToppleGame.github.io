@@ -29,7 +29,7 @@ function ToppleGet() {
 function ToppleInitGame() {
 	const start = performance.now();
 
-	document.getElementById("coordsxy").innerText = "Coords: " + gridAY[4] + ", " + gridAX[4][6]
+	document.getElementById("coordsxy").innerText = "Coords: " + gridAX[4][6] + ", " + gridAY[4]
 	grid.rows[4].cells[6].innerText = "Ello!!!\nTopple"
 
 	ToppleVisualise()

@@ -2,12 +2,17 @@ init()
 function init() {
 	login = document.getElementById("Login")
 	grid = document.getElementById("grid")
+
 	document.getElementsByClassName("vignette")[0].style.pointerEvents = "none"
+
 	grid.style.marginTop = '75px'
 	grid.style.marginLeft = '75px'
 
 }
+
 function keyCheck() {
+	// ToppleInit()
+
 	if (window.event.keyCode == 65) {
 		ToppleMove(4)
 	}
@@ -19,5 +24,13 @@ function keyCheck() {
 	}
 	if (window.event.keyCode == 83) {
 		ToppleMove(3)
-	}	
+	}
+	
 }
+
+function Save() {
+	ToppleSaveToDB(UserId, mLeft, mTop, nR, nC)
+}
+
+
+document.getElementsByClassName("up")[0].addEventListener('touchstart', alert("g"))

@@ -1,179 +1,91 @@
-function ToppleTP() {
-	grid.style.marginTop = '-490px'
-	grid.style.marginLeft = '-1675px'
-	nR = 16
-	nC = 41
-	move(nR, nC)
-	ToppleWhere()
-}
-
-function ToppleNewUser() {
-	email = document.getElementById("email").value;
-	username = document.getElementById("username").value;
-	password = document.getElementById("password").value;
-
-	firebase.auth().createUserWithEmailAndPassword(email, password)
-	.then((userCredential) => {
-		// Signed in
-		var user = userCredential.user;
-		ToppleSaveToDB(user.uid, 325, 210, 1, 1, username)
-		console.log(user);
-		console.log(userCredential);
-		// ...
-	})
-	.catch((error) => {
-		var errorCode = error.code;
-		var errorMessage = error.message;
-		console.log(errorCode);
-		console.log(errorMessage);
-	});
-}
-function ToppleLogin() {
-	email = document.getElementById("email").value;
-	username = document.getElementById("username").value;
-	password = document.getElementById("password").value;
-
-	firebase.auth().signInWithEmailAndPassword(email, password)
-	.then((userCredential) => {
-		// Signed in
-		var user = userCredential.user;
-		ToppleGetData(user.uid)
-		console.log(user);
-		console.log(userCredential);
-		// ...
-	})
-	.catch((error) => {
-		var errorCode = error.code;
-		var errorMessage = error.message;
-		console.log(errorCode);
-		console.log(errorMessage);
-	});
-
-	
-}
-function ToppleOut() {
-	firebase.auth().signOut().then(() => {console.log("ToppleOut");}).catch((error) => {console.log(error);});
-}
-
-function ToppleInit() {
-	mTop = parseInt(grid.style.marginTop)
-	mLeft = parseInt(grid.style.marginLeft)
-	ToppleWhere()
-}
-
-function ToppleWhere() {
-	document.getElementById("coordspx").innerText = "Coords in px: " + grid.style.marginTop + ", " + grid.style.marginLeft
-	document.getElementById("coordsxy").innerText = "Coords: " + nC + ", " + nR
-}
-
-function ToppleGrid() {
-	document.getElementsByClassName("vignette")[0].style.pointerEvents = "all"
-
-	if (grid.rows.length < maxRows) {
-		for (let i = 0; i < maxRows; i++) {
+map = {}
+ToppleGet()
+function ToppleGet() {
+	if (grid.rows.length < 9) {
+		for (let i = 0; i < 9; i++) {
 			grid.insertRow()
-			if (grid.rows[i].cells.length < maxCols*14) {
-				for (let j = 0; j < maxCols*14; j++) {
+			if (grid.rows[i].cells.length < 13) {
+				for (let j = 0; j < 13; j++) {
 					grid.rows[i].insertCell()
 				}
 			}
 		}
 	}
-}
-function ToppleInitGame() {
-	grid.rows[nR].cells[nC].innerText = "Ello!!!\nTopple"
 	
-	for (let i = 1; i < maxRows; i++) {
-		for (let j = 0; j < maxCols*14; j++) {
-			if ((map[i-1][j] === 9) && (map[i][j] != 9)) {
-				map[i][j] = 1
-			}
-		}
-	}
-	for (let i = 0; i < maxRows-1; i++) {
-		for (let j = 0; j < maxCols*14; j++) {
-			if ((map[i][j-1] === 9) && (map[i][j] != 9)) {
-				map[i][j] = 4
-			}
-		}
-	}
-
-	for (let i = 0; i < maxRows-1; i++) {
-		for (let j = 0; j < maxCols*14; j++) {
-			if ((map[i+1][j] === 9) && (map[i][j] != 9)) {
-				map[i][j] = 3
-			}
-		}
-	}
-	for (let i = 0; i < maxRows-1; i++) {
-		for (let j = 0; j < maxCols*14; j++) {
-			if ((map[i][j+1] === 9) && (map[i][j] != 9)) {
-				map[i][j] = 2
-			}
-		}
-	}
-	for (let i = 0; i < maxRows-1; i++) {
-		for (let j = 0; j < maxCols*14; j++) {
-			if (((map[i][j+1] === 9) && (map[i+1][j] === 9)) && (map[i][j] != 9)) {
-				map[i][j] = 7
-			} else if (((map[i][j-1] === 9) && (map[i+1][j] === 9)) && (map[i][j] != 9)) {
-				map[i][j] = 8
-			}
-		}
-	}
-	for (let i = 1; i < maxRows; i++) {
-		for (let j = 0; j < maxCols*14; j++) {
-			if (((map[i][j+1] === 9) && (map[i-1][j] === 9)) && (map[i][j] != 9)) {
-				map[i][j] = 6
-			} else if (((map[i][j-1] === 9) && (map[i-1][j] === 9)) && (map[i][j] != 9)) {
-				map[i][j] = 5
-			}
-		}
-	}
-	Object.keys(map).forEach(coordy => {
-		Object.keys(map[coordy]).forEach(coordx => {
-			grid.rows[coordy].cells[coordx].setAttribute('id', 'Wid_' + map[coordy][coordx])
-		})
-	})
-}
-
-UserId = ""
-
-function ToppleSaveToDB(uid, mLeft, mTop, nR, nC, username) {
-	firebase.database().ref('users/' + uid).set({
-		username: username,
-		position : {
-			left : mLeft,
-			top : mTop,
-			x : nC,
-			y : nR
-		}
-	});
-}
-function ToppleGetData(uid) {
-	// firebase.database().ref("users/" + "MYU7NAXDfnYhGcXTzmKAYcapmRw1").on("value", (snapshot) => {
-	firebase.database().ref("users/" + uid).on("value", (snapshot) => {
-		mLeft = snapshot.val()["position"]["left"];
-		mTop = snapshot.val()["position"]["top"];
-		nC = snapshot.val()["position"]["x"];
-		nR = snapshot.val()["position"]["y"];
-		grid.style.marginLeft = mLeft + "px";
-		grid.style.marginTop = mTop + "px";
-		pName = snapshot.val()["username"];
-		// UserId = "MYU7NAXDfnYhGcXTzmKAYcapmRw1"
-		UserId = uid;
-		oR = nR
-		oC = nC
-	})
 	firebase.database().ref("map/").on("value", (snapshot) => {
 		map = snapshot.val();
 		maxRows = map["rows"];
 		maxCols = map["TilesX"];
 		
-		document.getElementById("Name").innerHTML = "It's-a me, <b>" + pName + "</b>"
-
-		ToppleGrid()
+		// document.getElementById("Name").innerHTML = "It's-a me, <b>" + pName + "</b>"
+	
+		// ToppleGrid()
 		ToppleInitGame();
-		console.log(grid.rows.length, grid.rows[1].cells.length);
+		console.log(grid.rows.length, grid.rows[0].cells.length);
 	})
+	// ToppleInitGame()
+}
+
+function ToppleInitGame() {
+	const start = performance.now();
+
+	document.getElementById("coordsxy").innerText = "Coords: " + gridAY[4] + ", " + gridAX[4][6]
+	grid.rows[4].cells[6].innerText = "Ello!!!\nTopple"
+
+	ToppleVisualise()
+	const end = performance.now();
+	console.log(`Execution time: ${end - start} ms`);
+}
+
+
+
+gridAX = [
+	[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+	[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+	[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+	[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+	[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+	[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+	[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+	[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+	[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+]
+
+gridAY = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+
+function ToppleVisualise() {
+	for (let i = 0; i < 9; i++) {
+		for (let j = 0; j < 13; j++) {
+			Toppley = gridAY[i]
+			Topplex = gridAX[i][j]
+			grid.rows[i].cells[j].setAttribute('id', 'Wid_' + map[Toppley][Topplex])
+		}
+	}
+}
+
+function ToppleMove(D) {
+	upCheck = map[gridAY[3]][gridAX[4][6]] !== 9
+	leftCheck = map[gridAY[4]][gridAX[4][5]] !== 9
+	downCheck = map[gridAY[5]][gridAX[4][6]] !== 9
+	rightCheck = map[gridAY[4]][gridAX[4][7]] !== 9
+
+	for (let i = 0; i < 9; i++) {
+		if (D === 2 && rightCheck) {
+			for (let j = 0; j < 13; j++) {
+				gridAX[i][j] += 1
+			}
+		}
+		if (D === 4 && leftCheck) {
+			for (let j = 0; j < 13; j++) {
+				gridAX[i][j] -= 1
+			}
+		}
+		if (D === 1 && upCheck) {
+			gridAY[i] -= 1
+		}
+		if (D === 3 && downCheck) {
+			gridAY[i] += 1
+		}
+	}
+	ToppleInitGame()
 }

@@ -89,3 +89,14 @@ function ToppleMove(D) {
 	}
 	ToppleInitGame()
 }
+
+
+
+function ToppleSwitch() {
+	pad = document.getElementById("wirepad").getAttribute("class")
+	if (pad == "d-pad") {
+		document.getElementsByClassName("d-pad")[0].setAttribute("class", "o-pad")
+	} else {
+		document.getElementsByClassName("o-pad")[0].setAttribute("class", "d-pad")
+	}
+}

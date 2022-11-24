@@ -31,11 +31,3 @@ function keyCheck() {
 function Save() {
 	ToppleSaveToDB(UserId, mLeft, mTop, nR, nC)
 }
-
-
-document.getElementsByClassName("up")[0].addEventListener('touchstart', upfgh())
-function upfgh() {
-	num = 0
-	document.getElementById("name").innerText = num
-	num+=1
-}

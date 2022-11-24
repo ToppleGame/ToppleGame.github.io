@@ -33,4 +33,9 @@ function Save() {
 }
 
 
-document.getElementsByClassName("up")[0].addEventListener('touchstart', alert("g"))
+document.getElementsByClassName("up")[0].addEventListener('touchstart', upfgh())
+function upfgh() {
+	num = 0
+	document.getElementById("name").innerText = num
+	num+=1
+}

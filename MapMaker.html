@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tile Map Maker</title>
+  <style>table, td {
+	border: 1px solid yellowgreen;
+	border-collapse: collapse;
+}
+td {
+	min-width: 50px;
+	max-width: 50px;
+	height: 50px;
+	padding: 0px;
+	text-align: center;
+	border: 1px solid yellowgreen;
+}
+#img {
+	width: 50px;
+	height: 50px;
+	margin-bottom: -4px;
+}
+#saved {
+	width: 50px;
+	height: 50px;
+	margin-bottom: -4px;
+	border: 1px solid yellowgreen;
+}
+#ColBut {
+	font-size: 80%;
+	text-align: center;
+	cursor: pointer;
+	border: 1px solid red;
+}
+
+body {
+	overflow-x: scroll;
+}
+  </style>
+</head>
+<body>
+
+<input type="number" onchange="nTRC()" id="nRow" placeholder="Rows">
+<input type="number" onchange="nTRC()" id="nCol" placeholder="Columns">
+<input type="button" onclick="genTable()" value="Generate">
+
+<table id="table">
+	<tbody>
+	<tr id="row">
+		<td id="saved" ondblclick="clearCell(0,0)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (2).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(0,1)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (103).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(0,2)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (99).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(0,3)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (107).png" id="img">
+		</td>
+		<td id="ColBut" onclick="saveCell(0,4)" ondblclick="clearCell(0,4)" onwheel="pickTile(event,0,4)" onmouseleave="resetTiles()"></td>
+		<td id="saved" ondblclick="clearCell(0,5)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (90).png" id="img">
+		</td>
+		<td id="ColBut" onclick="saveCell(0,6)" ondblclick="clearCell(0,6)" onwheel="pickTile(event,0,6)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" ondblclick="clearCell(0,7)" onmouseleave="resetTiles()" onclick="saveCell(0,7)" onwheel="pickTile(event,0,7)"></td>
+		<td id="saved" ondblclick="clearCell(0,8)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (90).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(0,9)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (98).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(0,10)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (104).png" id="img">
+		</td>
+		<td id="ColBut" onclick="saveCell(0,11)" ondblclick="clearCell(0,11)" onwheel="pickTile(event,0,11)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(0,12)" ondblclick="clearCell(0,12)" onwheel="pickTile(event,0,12)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(0,13)" ondblclick="clearCell(0,13)" onwheel="pickTile(event,0,13)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(0,14)" ondblclick="clearCell(0,14)" onwheel="pickTile(event,0,14)" onmouseleave="resetTiles()"></td>
+	</tr>
+	<tr id="row">
+		<td id="saved" ondblclick="clearCell(1,0)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (67).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(1,1)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (96).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(1,2)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (97).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(1,3)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (100).png" id="img">
+		</td>
+		
+		<td id="ColBut" onclick="saveCell(1,4)" ondblclick="clearCell(1,4)" onwheel="pickTile(event,1,4)" onmouseleave="resetTiles()"></td>
+		<td id="saved" ondblclick="clearCell(1,5)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (90).png" id="img">
+		</td>
+		<td id="ColBut" onclick="saveCell(1,6)" ondblclick="clearCell(1,6)" onwheel="pickTile(event,1,6)" onmouseleave="resetTiles()"></td>
+		<td id="saved" ondblclick="clearCell(1,7)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (107).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(1,8)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (90).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(1,9)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (90).png" id="img">
+		</td>
+		<td id="ColBut" onclick="saveCell(1,10)" ondblclick="clearCell(1,10)" onwheel="pickTile(event,1,10)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(1,11)" ondblclick="clearCell(1,11)" onwheel="pickTile(event,1,11)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(1,12)" ondblclick="clearCell(1,12)" onwheel="pickTile(event,1,12)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(1,13)" ondblclick="clearCell(1,13)" onwheel="pickTile(event,1,13)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(1,14)" ondblclick="clearCell(1,14)" onwheel="pickTile(event,1,14)" onmouseleave="resetTiles()"></td>
+	</tr>
+	<tr id="row">
+		<td id="saved" ondblclick="clearCell(2,0)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (33).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(2,1)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (90).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(2,2)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (9).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(2,3)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (101).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(2,4)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (99).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(2,5)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (90).png" id="img">
+		</td>
+		
+		
+		
+		
+		
+		<td id="ColBut" onclick="saveCell(2,6)" ondblclick="clearCell(2,6)" onwheel="pickTile(event,2,6)" onmouseleave="resetTiles()"></td>
+		<td id="saved" ondblclick="clearCell(2,7)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (90).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(2,8)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (11).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(2,9)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (101).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(2,10)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (99).png" id="img">
+		</td>
+		<td id="ColBut" onclick="saveCell(2,11)" ondblclick="clearCell(2,11)" onwheel="pickTile(event,2,11)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(2,12)" ondblclick="clearCell(2,12)" onwheel="pickTile(event,2,12)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(2,13)" ondblclick="clearCell(2,13)" onwheel="pickTile(event,2,13)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(2,14)" ondblclick="clearCell(2,14)" onwheel="pickTile(event,2,14)" onmouseleave="resetTiles()"></td>
+	</tr>
+	<tr id="row">
+		<td id="saved" ondblclick="clearCell(3,0)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (2).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(3,1)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (95).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(3,2)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (96).png" id="img">
+		</td>
+		<td id="ColBut" onclick="saveCell(3,3)" ondblclick="clearCell(3,3)" onwheel="pickTile(event,3,3)" onmouseleave="resetTiles()"></td>
+		<td id="saved" ondblclick="clearCell(3,4)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (97).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(3,5)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (73).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(3,6)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (91).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(3,7)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (101).png" id="img">
+		</td>
+		
+		
+		
+		
+		
+		
+		
+		<td id="saved" ondblclick="clearCell(3,8)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (90).png" id="img">
+		</td>
+		<td id="ColBut" onclick="saveCell(3,9)" ondblclick="clearCell(3,9)" onwheel="pickTile(event,3,9)" onmouseleave="resetTiles()"></td>
+		<td id="saved" ondblclick="clearCell(3,10)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (90).png" id="img">
+		</td>
+		<td id="ColBut" onclick="saveCell(3,11)" ondblclick="clearCell(3,11)" onwheel="pickTile(event,3,11)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(3,12)" ondblclick="clearCell(3,12)" onwheel="pickTile(event,3,12)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(3,13)" ondblclick="clearCell(3,13)" onwheel="pickTile(event,3,13)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(3,14)" ondblclick="clearCell(3,14)" onwheel="pickTile(event,3,14)" onmouseleave="resetTiles()"></td>
+	</tr>
+	<tr id="row">
+		<td id="ColBut" onclick="saveCell(4,0)" ondblclick="clearCell(4,0)" onwheel="pickTile(event,4,0)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(4,1)" ondblclick="clearCell(4,1)" onwheel="pickTile(event,4,1)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(4,2)" ondblclick="clearCell(4,2)" onwheel="pickTile(event,4,2)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(4,3)" ondblclick="clearCell(4,3)" onwheel="pickTile(event,4,3)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(4,4)" ondblclick="clearCell(4,4)" onwheel="pickTile(event,4,4)" onmouseleave="resetTiles()"></td>
+		<td id="saved" ondblclick="clearCell(4,5)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (101).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(4,6)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (99).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(4,7)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (3).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(4,8)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (108).png" id="img">
+		</td>
+		<td id="ColBut" onclick="saveCell(4,9)" ondblclick="clearCell(4,9)" onwheel="pickTile(event,4,9)" onmouseleave="resetTiles()"></td>
+		<td id="saved" ondblclick="clearCell(4,10)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (105).png" id="img">
+		</td>
+		<td id="ColBut" onclick="saveCell(4,11)" ondblclick="clearCell(4,11)" onwheel="pickTile(event,4,11)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(4,12)" ondblclick="clearCell(4,12)" onwheel="pickTile(event,4,12)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(4,13)" ondblclick="clearCell(4,13)" onwheel="pickTile(event,4,13)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(4,14)" ondblclick="clearCell(4,14)" onwheel="pickTile(event,4,14)" onmouseleave="resetTiles()"></td>
+	</tr>
+	<tr id="row">
+		<td id="ColBut" onclick="saveCell(5,0)" ondblclick="clearCell(5,0)" onwheel="pickTile(event,5,0)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(5,1)" ondblclick="clearCell(5,1)" onwheel="pickTile(event,5,1)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(5,2)" ondblclick="clearCell(5,2)" onwheel="pickTile(event,5,2)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(5,3)" ondblclick="clearCell(5,3)" onwheel="pickTile(event,5,3)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(5,4)" ondblclick="clearCell(5,4)" onwheel="pickTile(event,5,4)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(5,5)" ondblclick="clearCell(5,5)" onwheel="pickTile(event,5,5)" onmouseleave="resetTiles()"></td>
+		<td id="saved" ondblclick="clearCell(5,6)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (102).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(5,7)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (101).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(5,8)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (100).png" id="img">
+		</td>
+		<td id="ColBut" onclick="saveCell(5,9)" ondblclick="clearCell(5,9)" onwheel="pickTile(event,5,9)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(5,10)" ondblclick="clearCell(5,10)" onwheel="pickTile(event,5,10)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(5,11)" ondblclick="clearCell(5,11)" onwheel="pickTile(event,5,11)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(5,12)" ondblclick="clearCell(5,12)" onwheel="pickTile(event,5,12)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(5,13)" ondblclick="clearCell(5,13)" onwheel="pickTile(event,5,13)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(5,14)" ondblclick="clearCell(5,14)" onwheel="pickTile(event,5,14)" onmouseleave="resetTiles()"></td>
+	</tr>
+	<tr id="row">
+		<td id="ColBut" onclick="saveCell(6,0)" ondblclick="clearCell(6,0)" onwheel="pickTile(event,6,0)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(6,1)" ondblclick="clearCell(6,1)" onwheel="pickTile(event,6,1)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(6,2)" ondblclick="clearCell(6,2)" onwheel="pickTile(event,6,2)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(6,3)" ondblclick="clearCell(6,3)" onwheel="pickTile(event,6,3)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(6,4)" ondblclick="clearCell(6,4)" onwheel="pickTile(event,6,4)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(6,5)" ondblclick="clearCell(6,5)" onwheel="pickTile(event,6,5)" onmouseleave="resetTiles()"></td>
+		<td id="saved" ondblclick="clearCell(6,6)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (6).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(6,7)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (117).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(6,8)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (82).png" id="img">
+		</td>
+		<td id="ColBut" onclick="saveCell(6,9)" ondblclick="clearCell(6,9)" onwheel="pickTile(event,6,9)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(6,10)" ondblclick="clearCell(6,10)" onwheel="pickTile(event,6,10)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(6,11)" ondblclick="clearCell(6,11)" onwheel="pickTile(event,6,11)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(6,12)" ondblclick="clearCell(6,12)" onwheel="pickTile(event,6,12)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(6,13)" ondblclick="clearCell(6,13)" onwheel="pickTile(event,6,13)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(6,14)" ondblclick="clearCell(6,14)" onwheel="pickTile(event,6,14)" onmouseleave="resetTiles()"></td>
+	</tr>
+	<tr id="row">
+		<td id="ColBut" onclick="saveCell(7,0)" ondblclick="clearCell(7,0)" onwheel="pickTile(event,7,0)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(7,1)" ondblclick="clearCell(7,1)" onwheel="pickTile(event,7,1)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(7,2)" ondblclick="clearCell(7,2)" onwheel="pickTile(event,7,2)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(7,3)" ondblclick="clearCell(7,3)" onwheel="pickTile(event,7,3)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(7,4)" ondblclick="clearCell(7,4)" onwheel="pickTile(event,7,4)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(7,5)" ondblclick="clearCell(7,5)" onwheel="pickTile(event,7,5)" onmouseleave="resetTiles()"></td>
+		<td id="saved" ondblclick="clearCell(7,6)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (14).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(7,7)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (106).png" id="img">
+		</td>
+		<td id="saved" ondblclick="clearCell(7,8)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (8).png" id="img">
+		</td>
+		<td id="ColBut" onclick="saveCell(7,9)" ondblclick="clearCell(7,9)" onwheel="pickTile(event,7,9)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(7,10)" ondblclick="clearCell(7,10)" onwheel="pickTile(event,7,10)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(7,11)" ondblclick="clearCell(7,11)" onwheel="pickTile(event,7,11)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(7,12)" ondblclick="clearCell(7,12)" onwheel="pickTile(event,7,12)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(7,13)" ondblclick="clearCell(7,13)" onwheel="pickTile(event,7,13)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(7,14)" ondblclick="clearCell(7,14)" onwheel="pickTile(event,7,14)" onmouseleave="resetTiles()"></td>
+	</tr>
+	<tr id="row">
+		<td id="ColBut" onclick="saveCell(8,0)" ondblclick="clearCell(8,0)" onwheel="pickTile(event,8,0)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(8,1)" ondblclick="clearCell(8,1)" onwheel="pickTile(event,8,1)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(8,2)" ondblclick="clearCell(8,2)" onwheel="pickTile(event,8,2)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(8,3)" ondblclick="clearCell(8,3)" onwheel="pickTile(event,8,3)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(8,4)" ondblclick="clearCell(8,4)" onwheel="pickTile(event,8,4)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(8,5)" ondblclick="clearCell(8,5)" onwheel="pickTile(event,8,5)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(8,6)" ondblclick="clearCell(8,6)" onwheel="pickTile(event,8,6)" onmouseleave="resetTiles()"></td>
+		<td id="saved" ondblclick="clearCell(8,7)" onmouseleave="resetTiles()">
+			<img src="tiles/Tile  (22).png" id="img">
+		</td>
+		<td id="ColBut" onclick="saveCell(8,8)" ondblclick="clearCell(8,8)" onwheel="pickTile(event,8,8)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(8,9)" ondblclick="clearCell(8,9)" onwheel="pickTile(event,8,9)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(8,10)" ondblclick="clearCell(8,10)" onwheel="pickTile(event,8,10)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(8,11)" ondblclick="clearCell(8,11)" onwheel="pickTile(event,8,11)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(8,12)" ondblclick="clearCell(8,12)" onwheel="pickTile(event,8,12)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(8,13)" ondblclick="clearCell(8,13)" onwheel="pickTile(event,8,13)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(8,14)" ondblclick="clearCell(8,14)" onwheel="pickTile(event,8,14)" onmouseleave="resetTiles()"></td>
+	</tr>
+	<tr id="row">
+		<td id="ColBut" onclick="saveCell(9,0)" ondblclick="clearCell(9,0)" onwheel="pickTile(event,9,0)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(9,1)" ondblclick="clearCell(9,1)" onwheel="pickTile(event,9,1)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(9,2)" ondblclick="clearCell(9,2)" onwheel="pickTile(event,9,2)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(9,3)" ondblclick="clearCell(9,3)" onwheel="pickTile(event,9,3)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(9,4)" ondblclick="clearCell(9,4)" onwheel="pickTile(event,9,4)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(9,5)" ondblclick="clearCell(9,5)" onwheel="pickTile(event,9,5)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(9,6)" ondblclick="clearCell(9,6)" onwheel="pickTile(event,9,6)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(9,7)" ondblclick="clearCell(9,7)" onwheel="pickTile(event,9,7)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(9,8)" ondblclick="clearCell(9,8)" onwheel="pickTile(event,9,8)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(9,9)" ondblclick="clearCell(9,9)" onwheel="pickTile(event,9,9)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(9,10)" ondblclick="clearCell(9,10)" onwheel="pickTile(event,9,10)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(9,11)" ondblclick="clearCell(9,11)" onwheel="pickTile(event,9,11)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(9,12)" ondblclick="clearCell(9,12)" onwheel="pickTile(event,9,12)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(9,13)" ondblclick="clearCell(9,13)" onwheel="pickTile(event,9,13)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(9,14)" ondblclick="clearCell(9,14)" onwheel="pickTile(event,9,14)" onmouseleave="resetTiles()"></td>
+	</tr>
+	<tr id="row">
+		<td id="ColBut" onclick="saveCell(10,0)" ondblclick="clearCell(10,0)" onwheel="pickTile(event,10,0)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(10,1)" ondblclick="clearCell(10,1)" onwheel="pickTile(event,10,1)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(10,2)" ondblclick="clearCell(10,2)" onwheel="pickTile(event,10,2)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(10,3)" ondblclick="clearCell(10,3)" onwheel="pickTile(event,10,3)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(10,4)" ondblclick="clearCell(10,4)" onwheel="pickTile(event,10,4)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(10,5)" ondblclick="clearCell(10,5)" onwheel="pickTile(event,10,5)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(10,6)" ondblclick="clearCell(10,6)" onwheel="pickTile(event,10,6)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(10,7)" ondblclick="clearCell(10,7)" onwheel="pickTile(event,10,7)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(10,8)" ondblclick="clearCell(10,8)" onwheel="pickTile(event,10,8)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(10,9)" ondblclick="clearCell(10,9)" onwheel="pickTile(event,10,9)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(10,10)" ondblclick="clearCell(10,10)" onwheel="pickTile(event,10,10)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(10,11)" ondblclick="clearCell(10,11)" onwheel="pickTile(event,10,11)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(10,12)" ondblclick="clearCell(10,12)" onwheel="pickTile(event,10,12)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(10,13)" ondblclick="clearCell(10,13)" onwheel="pickTile(event,10,13)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(10,14)" ondblclick="clearCell(10,14)" onwheel="pickTile(event,10,14)" onmouseleave="resetTiles()"></td>
+	</tr>
+	<tr id="row">
+		<td id="ColBut" onclick="saveCell(11,0)" ondblclick="clearCell(11,0)" onwheel="pickTile(event,11,0)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(11,1)" ondblclick="clearCell(11,1)" onwheel="pickTile(event,11,1)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(11,2)" ondblclick="clearCell(11,2)" onwheel="pickTile(event,11,2)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(11,3)" ondblclick="clearCell(11,3)" onwheel="pickTile(event,11,3)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(11,4)" ondblclick="clearCell(11,4)" onwheel="pickTile(event,11,4)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(11,5)" ondblclick="clearCell(11,5)" onwheel="pickTile(event,11,5)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(11,6)" ondblclick="clearCell(11,6)" onwheel="pickTile(event,11,6)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(11,7)" ondblclick="clearCell(11,7)" onwheel="pickTile(event,11,7)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(11,8)" ondblclick="clearCell(11,8)" onwheel="pickTile(event,11,8)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(11,9)" ondblclick="clearCell(11,9)" onwheel="pickTile(event,11,9)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(11,10)" ondblclick="clearCell(11,10)" onwheel="pickTile(event,11,10)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(11,11)" ondblclick="clearCell(11,11)" onwheel="pickTile(event,11,11)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(11,12)" ondblclick="clearCell(11,12)" onwheel="pickTile(event,11,12)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(11,13)" ondblclick="clearCell(11,13)" onwheel="pickTile(event,11,13)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(11,14)" ondblclick="clearCell(11,14)" onwheel="pickTile(event,11,14)" onmouseleave="resetTiles()"></td>
+	</tr>
+	<tr id="row">
+		<td id="ColBut" onclick="saveCell(12,0)" ondblclick="clearCell(12,0)" onwheel="pickTile(event,12,0)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(12,1)" ondblclick="clearCell(12,1)" onwheel="pickTile(event,12,1)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(12,2)" ondblclick="clearCell(12,2)" onwheel="pickTile(event,12,2)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(12,3)" ondblclick="clearCell(12,3)" onwheel="pickTile(event,12,3)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(12,4)" ondblclick="clearCell(12,4)" onwheel="pickTile(event,12,4)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(12,5)" ondblclick="clearCell(12,5)" onwheel="pickTile(event,12,5)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(12,6)" ondblclick="clearCell(12,6)" onwheel="pickTile(event,12,6)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(12,7)" ondblclick="clearCell(12,7)" onwheel="pickTile(event,12,7)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(12,8)" ondblclick="clearCell(12,8)" onwheel="pickTile(event,12,8)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(12,9)" ondblclick="clearCell(12,9)" onwheel="pickTile(event,12,9)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(12,10)" ondblclick="clearCell(12,10)" onwheel="pickTile(event,12,10)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(12,11)" ondblclick="clearCell(12,11)" onwheel="pickTile(event,12,11)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(12,12)" ondblclick="clearCell(12,12)" onwheel="pickTile(event,12,12)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(12,13)" ondblclick="clearCell(12,13)" onwheel="pickTile(event,12,13)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(12,14)" ondblclick="clearCell(12,14)" onwheel="pickTile(event,12,14)" onmouseleave="resetTiles()"></td>
+	</tr>
+	<tr id="row">
+		<td id="ColBut" onclick="saveCell(13,0)" ondblclick="clearCell(13,0)" onwheel="pickTile(event,13,0)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(13,1)" ondblclick="clearCell(13,1)" onwheel="pickTile(event,13,1)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(13,2)" ondblclick="clearCell(13,2)" onwheel="pickTile(event,13,2)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(13,3)" ondblclick="clearCell(13,3)" onwheel="pickTile(event,13,3)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(13,4)" ondblclick="clearCell(13,4)" onwheel="pickTile(event,13,4)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(13,5)" ondblclick="clearCell(13,5)" onwheel="pickTile(event,13,5)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(13,6)" ondblclick="clearCell(13,6)" onwheel="pickTile(event,13,6)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(13,7)" ondblclick="clearCell(13,7)" onwheel="pickTile(event,13,7)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(13,8)" ondblclick="clearCell(13,8)" onwheel="pickTile(event,13,8)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(13,9)" ondblclick="clearCell(13,9)" onwheel="pickTile(event,13,9)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(13,10)" ondblclick="clearCell(13,10)" onwheel="pickTile(event,13,10)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(13,11)" ondblclick="clearCell(13,11)" onwheel="pickTile(event,13,11)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(13,12)" ondblclick="clearCell(13,12)" onwheel="pickTile(event,13,12)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(13,13)" ondblclick="clearCell(13,13)" onwheel="pickTile(event,13,13)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(13,14)" ondblclick="clearCell(13,14)" onwheel="pickTile(event,13,14)" onmouseleave="resetTiles()"></td>
+	</tr>
+	<tr id="row">
+		<td id="ColBut" onclick="saveCell(14,0)" ondblclick="clearCell(14,0)" onwheel="pickTile(event,14,0)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(14,1)" ondblclick="clearCell(14,1)" onwheel="pickTile(event,14,1)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(14,2)" ondblclick="clearCell(14,2)" onwheel="pickTile(event,14,2)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(14,3)" ondblclick="clearCell(14,3)" onwheel="pickTile(event,14,3)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(14,4)" ondblclick="clearCell(14,4)" onwheel="pickTile(event,14,4)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(14,5)" ondblclick="clearCell(14,5)" onwheel="pickTile(event,14,5)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(14,6)" ondblclick="clearCell(14,6)" onwheel="pickTile(event,14,6)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(14,7)" ondblclick="clearCell(14,7)" onwheel="pickTile(event,14,7)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(14,8)" ondblclick="clearCell(14,8)" onwheel="pickTile(event,14,8)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(14,9)" ondblclick="clearCell(14,9)" onwheel="pickTile(event,14,9)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(14,10)" ondblclick="clearCell(14,10)" onwheel="pickTile(event,14,10)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(14,11)" ondblclick="clearCell(14,11)" onwheel="pickTile(event,14,11)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(14,12)" ondblclick="clearCell(14,12)" onwheel="pickTile(event,14,12)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(14,13)" ondblclick="clearCell(14,13)" onwheel="pickTile(event,14,13)" onmouseleave="resetTiles()"></td>
+		<td id="ColBut" onclick="saveCell(14,14)" ondblclick="clearCell(14,14)" onwheel="pickTile(event,14,14)" onmouseleave="resetTiles()"></td>
+	</tr>
+	</tbody>
+</table>
+
+<script>
+  var table = document.getElementById("table");
+
+var rows
+var columns
+
+var tile = 0
+const lTile = 119
+
+// var tile = 0
+// var tileno
+
+
+function nTRC() {
+	// tileno = parseInt(document.getElementById("sTile").value)
+	rowsn = parseInt(document.getElementById("nRow").value);
+	columnsn = parseInt(document.getElementById("nCol").value);
+}
+
+function genTable() {
+	table.innerHTML="\n\t"
+		for (let i = 0; i < rowsn; i++) {
+			table.insertRow().setAttribute("id", "row")
+			// table.rows[i].innerHTML="\n\t\t"
+			for (let j = 0; j < columnsn; j++) {
+				table.rows[i].insertCell();
+				table.rows[i].cells[j].setAttribute("id", "ColBut");
+				table.rows[i].cells[j].setAttribute("onclick", "saveCell(" + i + "," + j + ")");
+				table.rows[i].cells[j].setAttribute("ondblclick", "clearCell(" + i + "," + j + ")");
+				table.rows[i].cells[j].setAttribute("onwheel", "pickTile(event," + i + "," + j + ")");
+				table.rows[i].cells[j].setAttribute("onmouseleave", "resetTiles()");
+				table.rows[i].cells[j].before("\n\t\t")
+			}
+			table.rows[i].innerHTML += "\n\t"
+			table.rows[i].before("\n\t")
+		}
+		table.rows[0].cells[0].innerHTML = '\n\t\t\t<img src="tiles/Tile  (31).png" id="img">\n\t\t'
+		table.rows[1].cells[0].innerHTML = '\n\t\t\t<img src="tiles/Tile  (21).png" id="img">\n\t\t'
+		table.rows[2].cells[0].innerHTML = '\n\t\t\t<img src="tiles/Tile  (33).png" id="img">\n\t\t'
+		table.rows[1].cells[1].innerHTML = '\n\t\t\t<img src="tiles/Tile  (62).png" id="img">\n\t\t'
+		table.rows[rowsn-1].after("\n\t")
+		table.innerHTML+="\n"
+
+}
+
+
+function resetTiles() {
+	tile = 0
+}
+
+function saveCell(nR, nC) {
+	table.rows[nR].cells.item(nC).removeAttribute("onwheel");
+	table.rows[nR].cells.item(nC).removeAttribute("onclick");
+	table.rows[nR].cells.item(nC).setAttribute("id", "saved");
+}
+
+
+function clearCell(nR, nC) {
+	table.rows[nR].cells.item(nC).innerHTML = "";
+	table.rows[nR].cells[nC].setAttribute("onclick", "saveCell(" + nR + "," + nC + ")");
+	table.rows[nR].cells[nC].setAttribute("onwheel", "pickTile(event," + nR + "," + nC + ")");
+	table.rows[nR].cells.item(nC).setAttribute("id", "ColBut");
+}
+// function wheel(event) {
+// 	if (tile >= 0) {
+// 		tile += event.deltaY/100;
+// 	} else {}
+// 	console.log(tile);
+// }
+
+
+
+
+
+function pickTile(event, nR, nC) {
+	tile -= event.deltaY/100;
+	
+	if (tile == -1) {tile = lTile}
+	else if (tile == lTile+1) {tile = 0}
+	
+	console.log(tile);
+	
+	var tiletag = '\n\t\t\t<img src="tiles/Tile  (' + tile + ').png" id="img">\n\t\t'
+	table.rows[nR].cells[nC].innerHTML = tiletag;
+}
+  </script>
+</body>
+</html>

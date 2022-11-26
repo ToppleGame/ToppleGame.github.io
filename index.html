@@ -22,19 +22,13 @@
 			<input type="number" id="y">
 		</div>
 		<div id="buttons">
-			<button onclick="ToppleSwitch()">Change Pad</button><br>
-			<button onclick="ToppleOut()">ToppleOut</button><br>
+			<input type="checkbox" id="PadSwitch" onchange="ToppleSwitch()"><label for="PadSwitch">O-Pad</label><br>
+			<input type="checkbox" id="CollisionCheck" checked><label for="CollisionCheck">Collision</label><br>
 			<button onclick="ToppleTP()">ToppleTP</button><br>
 			<button onclick="Save()">ToppleSave</button>
 		</div>
 	</div>
 	<div id="Game_Screen">
-		<!-- <div id="Login">
-			<input type="email" placeholder="email" id="email">
-			<input type="text" placeholder="username" id="username">
-			<input type="text" placeholder="password" id="password">
-			<input type="button" value="Login" onclick="ToppleLogin()">
-		</div> -->
 		<table id="grid"></table>
 	</div>
 	<div class="vignette"></div>

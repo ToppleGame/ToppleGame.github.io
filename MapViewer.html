@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Version 0.0.9</title>
+	<style>
+		table, td {
+			/* border: 1px solid yellowgreen; */
+			border-collapse: collapse;
+			overflow: hidden;
+		}
+		#Wid_undefined {
+			background-color: #f1f197;
+		}
+		#Wid_9 {
+			background-color: black;
+		}
+	</style>
+	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+</head>
+<body>
+	<table id="grid"></table>
+	<script>
+		// Your web app's Firebase configuration
+		var firebaseConfig = {
+			apiKey: "AIzaSyCrG0uDLoVijnkprLHSechXwFcbX1zOpJI",
+			authDomain: "topple-game--u.firebaseapp.com",
+			databaseURL: "https://topple-game--u-default-rtdb.firebaseio.com",
+			projectId: "topple-game--u",
+			storageBucket: "topple-game--u.appspot.com",
+			messagingSenderId: "435823978676",
+			appId: "1:435823978676:web:f162ae2ee2e0ce0c7b0fe1",
+			measurementId: "G-6VRWJXNNBJ"
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+		
+		// Set database variable
+		var database = firebase.database()
+	</script>
+	<script>
+		init()
+		map = {}
+		grid = document.getElementById("grid")
+		function init() {
+			firebase.database().ref("map/").on("value", (snapshot) => {
+				map = snapshot.val();
+				if (grid.rows.length < map["rows"]) {
+					for (let i = 0; i < map["rows"]; i++) {
+						grid.insertRow()
+						if (grid.rows[i].cells.length < map["TilesX"] * 14) {
+							for (let j = 0; j < map["TilesX"] * 14; j++) {
+								grid.rows[i].insertCell()
+								grid.rows[i].cells[j].setAttribute('id', 'Wid_' + map[i][j])
+								console.log("Cells Generated");
+							}
+						}
+					}
+				}
+			})
+		}
+	</script>
+</body>
+</html>

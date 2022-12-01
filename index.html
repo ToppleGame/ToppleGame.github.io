@@ -11,12 +11,13 @@
 	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
 </head>
-<body onkeydown="keyCheck()">
+<body onkeydown="keyCheck()" onkeyup="checkKey()">
 	<div class="data">
+		<div id="player"></div>
 		<div id="playerdata">
 			<p id="Name"></p>
 			<div id="coords">
-				<p id="coordsxy">Coords: </p>
+				<p id="coordsxy" onclick="rep()">Coords: </p>
 			</div>
 			<input type="number" id="x"><br>
 			<input type="number" id="y">
@@ -24,20 +25,28 @@
 		<div id="buttons">
 			<input type="checkbox" id="PadSwitch" onchange="ToppleSwitch()"><label for="PadSwitch">O-Pad</label><br>
 			<input type="checkbox" id="CollisionCheck" checked><label for="CollisionCheck">Collision</label><br>
+			<!-- <button onclick="ToppleOut()">ToppleOut</button><br> -->
 			<button onclick="ToppleTP()">ToppleTP</button><br>
 			<button onclick="Save()">ToppleSave</button>
 		</div>
 	</div>
-	<div id="Game_Screen">
+	<div id="Game_Screen" class="Screen">
+		<!-- <div id="Login">
+			<input type="email" placeholder="email" id="email">
+			<input type="text" placeholder="username" id="username">
+			<input type="text" placeholder="password" id="password">
+			<input type="button" value="Login" onclick="ToppleLogin()">
+		</div> -->
 		<table id="grid"></table>
 	</div>
-	<div class="vignette"></div>
+	<div id="vignette" class="Screen"></div>
+	<table id="HotBar" align="center"></table>
 	<div class="set wire" id="pad">
 	  <nav class="d-pad" id="wirepad">
 		<a class="up" onclick="ToppleMove(1)" href="#"></a>
 		<a class="right" onclick="ToppleMove(2)" href="#"></a>
 		<a class="down" onclick="ToppleMove(3)" href="#"></a>
-		<a class="left" onclick="ToppleMove(4)" href="#"></a>  
+		<a class="left" onclick="ToppleMove(4)" href="#"></a>
 	  </nav>
 	</div>
 	<script>

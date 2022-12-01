@@ -1,58 +1,71 @@
-:root {
-	--cellpx: 47px
-}
-body {
-	background-color: grey;
-}
-table, td {
-	border: 1px solid yellowgreen;
-	border-collapse: collapse;
-	overflow: hidden;
-}
-td {
+:root {--cellpx: 47px}
+
+body {background-color: grey;}
+
+#grid td {
+	height: var(--cellpx);
 	min-width: var(--cellpx);
 	max-width: var(--cellpx);
-	height: var(--cellpx);
+	border: 1px solid yellowgreen;
 }
-#grid {
-	transform: translate(-75px, -75px)
+#grid {border: 1px solid yellowgreen; border-collapse: collapse; transform: translate(-75px, -75px)}
+
+#HotBar {
+	bottom: 0;
+	margin-left: 50%;
+	position: absolute;
+	/* border-radius:10px; */
+	border: black 2px solid;
+	transform: translate(-50%, -10px);
 }
-#Wid_9 {
-	background-color: black;
+#HotBar td {
+	width: 40px;
+	height: 40px;
+	border: darkgrey 2px;
 }
+
+#activeSlot {background-color: darkgrey;}
+#Slot {background-color: white;}
+
+#Wid_1 {background-color: lightgreen;}
+#Wid_2 {background-color: lightblue;}
+#Wid_3 {background-color: lightgoldenrodyellow;}
+#Wid_4 {background-color: lightpink;}
+#Wid_5 {background-color: #55e755;}
+#Wid_6 {background-color: #75cdeb;}
+#Wid_7 {background-color: #f1f197;}
+#Wid_8 {background-color: #f19caa;}
+#Wid_9 {background-color: black;}
+
 .data {
+	width: 100%;
+	height: 104px;
 	border: 1px solid black;
-	width: 99.25%;
-	height: 100px;
 	background-color: white;
 }
-#playerdata {
+#player {
 	float: left;
+	width: 60px;
+	height: 80px;
+	margin: 10px;
+	border: black dashed 2px;
 }
-#buttons {
-	margin-top: 15px;
-	margin-left: 200px;
-}
-#Game_Screen {
-	background-color: #e4e6a8;
+input[type = number] {width: 100px;}
+#playerdata {float: left;}
+#buttons {margin: 10px;}
+
+.Screen {
+	top: 50%;
+	left: 50%;
+	width: 650px;
+	height: 450px;
 	position: absolute;
+	transform: translate(-50%, -50%);
+}
+
+#Game_Screen {
 	border: 2px dashed black;
-	width: 650px;
-	height: 450px;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	background-color: #e4e6a8;
 }
-#Login {
-	margin-top: 100px;
-	margin-left: 100px;
-}
-.vignette {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	width: 650px;
-	height: 450px;
-	box-shadow: 0 0 140px rgba(0, 0, 0, 1) inset;
-	transform: translate(-50%, -50%);
-}
+#Login {margin: 100px;}
+#vignette {box-shadow: 0 0 140px rgba(0, 0, 0, 1) inset;}
